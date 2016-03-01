@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="gb2312">
+        <title>JavaScript视频课程-第36节 事件 - 通过表单事件实现漂亮友好的表单验证</title>
+        <link rel="stylesheet" type="text/css" href="style/reg.css">
+        <script type="text/javascript" src="js/ajax.js"></script>
+        <script type="text/javascript" src="js/reg.js"></script>
+    </head>
+
+    <body>
+    	<dl id="inpList">
+        	<dt>用户注册</dt>
+        	<dd class="def cl">
+            	<label><span class="names">用户帐号：</span><input id="uname" type="text"/></label>
+                <p><i></i>给自己起个名字吧，它将成为您登录本站的用户名</p>
+            </dd>
+            <dd class="def cl">
+            	<label><span class="names">电子邮箱：</span><input id="email" type="text"/></label>
+                <p><i></i>请输入您的常用邮箱地址，此邮箱地址将作为修改密码</p>
+            </dd>
+            <dd class="def cl">
+            	<label><span class="names">手机号码：</span><input id="mobile" type="text"/></label>
+                <p><i></i>请输入您的手机号码，方便我们之间的联系</p>
+            </dd>
+            <dd class="def cl">
+            	<label><span class="names">安全密码：</span><input id="pwd" type="password"/></label>
+                <p><i></i>请输入安全密码，它将作为您的登录密码</p>
+            </dd>
+            <dd class="def cl">
+            	<label><span class="names">确认密码：</span><input id="qrpwd" type="password"/></label>
+                <p><i></i>请将上面的密码再输入一次</p>
+            </dd>
+            <dd class="def cl">
+            	<label><a id="enter" href="javascript:void(0);">立即注册</a></label>
+            </dd>
+        </dl>
+        <div id="box"></div>
+    </body>
+</html>

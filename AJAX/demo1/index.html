@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="gb2312">
+        <title>无标题文档</title>
+        <script type="text/javascript" src="js/ajax.js"></script>
+        <script type="text/javascript">
+        window.onload = function()
+		{
+			var $ = function(_id)
+			{
+				return document.getElementById(_id);
+			}
+			
+			setInterval
+			(
+				function()
+				{
+					var x = new Ajax();
+					x.post
+					(
+						"data.php", "", function(str)
+						{
+							$("box").innerHTML = str;
+						}, true
+					);
+				}, 1000
+			);			
+		}
+        </script>
+    </head>
+    
+    <body>
+    	<div id="box"></div>
+    </body>
+</html>

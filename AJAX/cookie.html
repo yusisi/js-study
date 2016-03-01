@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cookie</title>
+	<script type="text/javascript">
+	var cookie = {
+		//添加cookie名，值，时间
+		add:function(key,val,h)
+		{
+			var str = key + "=" + escape(val); //escape转码
+			if(h>0)//如果h=0，就不设置过期时间，浏览器关闭自动删除
+		{
+			var date =new Date();
+			var ms = h*3600*1000;
+			date.setTimeout(date.getTime() + ms);
+
+			str += ";expires=" + date.toGMTString();
+
+			//console.log(str);
+		}
+			document.cookie = str;
+			alert("添加cookie成功");
+		},
+		get:function(key){
+			var arrStr = document.cookie.split("; ");
+			for(var i = 0; i < arrStr.length; i++){
+				var temp = arrStr[i].split("=");
+				if(temp[0] == key){
+					return unescape(temp[1]);
+				}
+			}
+		},
+		del:function(key){
+			var date = new Date();
+			date.setTime(-10000);
+			document.cookie = key + "=a;expires=" + date.toGMTString();
+		},
+		getAll:function(){
+			var str = document.cookie;
+			var arr = document.cookie.split("; ");
+			var valArr = [];
+			if(!str){
+				alert("您没有保存任何cookie");
+			}else{
+				for(var i = 0; i < arr.length; i++){
+					var temp = arr[i].split("=");
+					valArr.push("key:" + temp[1] + ",val:" + unescape(temp[1]));
+				}
+				return valArr;
+			}
+		}
+	};
+
+		//cookie.add("uname","kowoshung",1);
+		//uname=kowoshung;expires==Mon, 03 Dec 2012 02:22:54 GMT
+		//cookie.add("uname","kowoshung",2);
+		//uname=kowoshung;expires==Mon, 03 Dec 2012 03:22:54 GMT
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>

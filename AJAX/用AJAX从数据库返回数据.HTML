@@ -1,0 +1,74 @@
+<html><!DOCTYPE html>
+<html>
+<head>
+<script>
+function showCustomer(str)
+{
+var xmlhttp;    
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/try/ajax/getcustomer.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<form action=""> 
+<select name="customers" onchange="showCustomer(this.value)" style="font-family:Verdana, Arial, Helvetica, sans-serif;">
+<option value="APPLE">Apple Computer, Inc.</option>
+<option value="BAIDU ">BAIDU, Inc</option>
+<option value="Canon">Canon USA, Inc.</option>
+<option value="Google">Google, Inc.</option>
+<option value="Nokia">Nokia Corporation</option>
+<option value="SONY">Sony Corporation of America</option>
+</select>
+</form>
+<br>
+<div id="txtHint">Customer info will be listed here...</div>
+
+</body>
+</html>
+
+
+<%
+response.expires=-1
+sql="SELECT * FROM CUSTOMERS WHERE CUSTOMERID="
+sql=sql & "'" & request.querystring("q") & "'"
+
+set conn=Server.CreateObject("ADODB.Connection")
+conn.Provider="Microsoft.Jet.OLEDB.4.0"
+conn.Open(Server.Mappath("/db/northwind.mdb"))
+set rs=Server.CreateObject("ADODB.recordset")
+rs.Open sql,conn
+
+response.write("<table>")
+do until rs.EOF
+  for each x in rs.Fields
+    response.write("<tr><td><b>" & x.name & "</b></td>")
+    response.write("<td>" & x.value & "</td></tr>")
+  next
+  rs.MoveNext
+loop
+response.write("</table>")
+%>
+
+//http://www.runoob.com/ajax/ajax-database.html
