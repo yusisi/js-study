@@ -55,7 +55,7 @@ function Ajax(type)
 		{
 			//if(before){before();}
 			try{before();}catch(e){}
-			aj.xhr.open("POST", url, asyn);
+			aj.xhr.open("POST", url + "?r"=(Math.random()), asyn);
 			if(complete)
 			{
 				aj.xhr.onreadystatechange = aj.processHandle;
