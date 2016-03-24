@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<!-- 
+1.导入jq库
+2.获取username的节点
+3.为username添加change响应函数
+4.获取username的value属性值，去除前后空格且不为空，准备发送ajax请求
+5.发送ajax请求检验username是否可用
+6.在服务器直接返回一个html的片段
+7.在客户端浏览器中直接返回message到html中
+ -->
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(":input[name='username']").change(function(){
+			var val = $(this).val();
+			val = $.trim(val);  //给值去除空格
+			if(val != ""){
+				var url = "/valiateUserName";
+				var args = {"UserName":val,"time":new Date()};
+				$.post(url,args,function(data){
+					$("message").html(data);
+				});
+
+			}
+		});
+	})
+</script>
+</head>
+<body>
+	<form action="" method="post">
+		UserName:<input type="text" name="username">
+		<br/>
+		<div id="message"></div>
+		<input type="button" value="Submit">
+	</form>
+</body>
+</html>
